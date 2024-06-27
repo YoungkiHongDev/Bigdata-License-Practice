@@ -1,0 +1,60 @@
+# Pandas 라이브러리 불러오기
+import pandas as pd
+
+# csv 데이터 불러오기
+df = pd.read_csv(데이터 파일 경로)
+
+# csv 데이터 내보내기
+pd.DataFrame({'내보낼 컬럼명' : 넣을 컬럼명}).to_csv('파일명.csv', index=False)
+
+# 데이터프레임 구조 확인
+df.info()
+
+# 반올림
+num = round(num, 2)	#소수 2번째 자리까지
+num = round(num, 3)	#소수 3번째 자리까지
+
+# 컬럼에서 1~10 데이터 검색
+df['컬럼'].between(1, 10)
+
+# 컬럼에서 특정 데이터 검색
+df['컬럼'].isin(데이터)
+df['컬럼'].isin([데이터1,데이터2])
+
+# 결측치가 있는 컬럼과 개수 확인
+df.isnull().sum()
+
+# 데이터를 날짜형으로 변환
+pd.to_datetime(df['날짜형컬럼'])
+
+# 중복 제거
+df['컬럼명'].unique()
+
+# 결측치 처리
+## 특정 컬럼 제거
+df.drop(columns=['컬럼명'], inplace=True)
+df.drop(columns=['컬럼명1', '컬럼명2'], inplace=True)
+
+## 평균값으로 대체
+df['컬럼명'].fillna(df['컬럼명'].mean(), inplace=True)
+
+## 중앙값으로 대체
+df['컬럼명'].fillna(df['컬럼명'].median(), inplace=True)
+
+## 최빈값으로 대체
+df['컬럼명'].fillna(df['컬럼명'].mode()[0], inplace=True)
+
+## 원하는 값으로 대체
+df['컬럼명'].fillna('원하는값', inplace=True)
+
+## 결측치가 있는 행 모두 제거
+df.dropna(inplace=True)
+
+# 결측값이 존재하는 컬럼들의 이름 출력
+df.columns[df.isna().any()]
+
+# 컬럼에 존재하는 값과 개수를 출력
+df['컬럼명'].value_counts()
+
+# 기초통계량 출력 (개수, 평균, 표준편차, 최소값, 최대값, 사분위수)
+df.describe()
